@@ -45,5 +45,14 @@ public class UserService {
 		user.updateUser(dto);
 		return id;
 	}
+	
+	// deleteUserById
+	@Transactional
+	public Long deleteUserById(Long id) {
+		User user = userRepository.findById(id)
+				.orElseThrow(() -> new IllegalArgumentException(String.format("Not Found Such Id=%s", id)));
+		userRepository.delete(user);
+		return id;
+	}
 
 }
