@@ -33,7 +33,7 @@ public class UserService {
 	// getUserByID
 	public FindDTO getUserById(Long id) {
 		User user = userRepository.findById(id)
-				.orElseThrow(() -> new IllegalArgumentException(String.format("Not Found Such Id=%s", id)));
+				.orElseThrow(() -> new IllegalArgumentException(String.format("Not Found Resource: Id=%s", id)));
 		return new FindDTO(user);
 	}
 
@@ -41,7 +41,7 @@ public class UserService {
 	@Transactional
 	public Long updateUserById(Long id, UpdateDTO dto) {
 		User user = userRepository.findById(id)
-				.orElseThrow(() -> new IllegalArgumentException(String.format("Not Found Such Id=%s", id)));
+				.orElseThrow(() -> new IllegalArgumentException(String.format("Not Found Resource: Id=%s", id)));
 		user.updateUser(dto);
 		return id;
 	}
@@ -50,9 +50,16 @@ public class UserService {
 	@Transactional
 	public Long deleteUserById(Long id) {
 		User user = userRepository.findById(id)
-				.orElseThrow(() -> new IllegalArgumentException(String.format("Not Found Such Id=%s", id)));
+				.orElseThrow(() -> new IllegalArgumentException(String.format("Not Found Resource: Id=%s", id)));
 		userRepository.delete(user);
 		return id;
+	}
+
+	// findUserByUsername
+	public FindDTO getUserByUsername(String username) {
+		User user = userRepository.findByUsername(username)
+				.orElseThrow(() -> new IllegalArgumentException(String.format("Not Found Resource: Username=%s", username)));
+		return new FindDTO(user);
 	}
 
 }
