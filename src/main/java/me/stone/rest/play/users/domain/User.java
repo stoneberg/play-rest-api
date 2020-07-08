@@ -7,12 +7,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.util.StringUtils;
+
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import me.stone.rest.play.users.payload.UserReq.UpdateDTO;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EqualsAndHashCode
@@ -58,6 +61,37 @@ public class User {
 		this.age = age;
 		this.role = role;
 		this.ssn = ssn;
+	}
+
+	// update user information by UserDTO
+	public void updateUser(UpdateDTO dto) {
+		if (StringUtils.hasText(dto.getUsername())) {
+			this.username = dto.getUsername();
+		}
+		
+		if (StringUtils.hasText(dto.getFirstname())) {
+			this.firstname = dto.getFirstname();
+		}
+		
+		if (StringUtils.hasText(dto.getLastname())) {
+			this.lastname = dto.getLastname();
+		}
+		
+		if (StringUtils.hasText(dto.getEmail())) {
+			this.email = dto.getEmail();
+		}
+		
+		if (dto.getAge() != null && dto.getAge() > 18) {
+			this.age = dto.getAge();
+		}
+		
+		if (StringUtils.hasText(dto.getRole())) {
+			this.role = dto.getRole();
+		}
+		
+		if (StringUtils.hasText(dto.getSsn())) {
+			this.ssn = dto.getSsn();
+		}
 	}
 
 }
