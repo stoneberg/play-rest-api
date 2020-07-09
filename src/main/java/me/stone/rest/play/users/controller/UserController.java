@@ -1,10 +1,12 @@
 package me.stone.rest.play.users.controller;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +28,7 @@ import me.stone.rest.play.users.service.UserService;
 
 @Slf4j
 @RequiredArgsConstructor
+@Validated // @Min(1)
 @RestController
 //@RequestMapping("/users")
 public class UserController {
@@ -51,7 +54,7 @@ public class UserController {
 	}
 	
 	@GetMapping(path = "/users/{id}")
-	public ResponseEntity<?> getUserId(@PathVariable("id") Long id) {
+	public ResponseEntity<?> getUserById(@PathVariable("id") @Min(1) Long id) {
 		try {
 			return ResponseEntity.ok(userService.getUserById(id));
 		} catch (UserNotFoundException e) {

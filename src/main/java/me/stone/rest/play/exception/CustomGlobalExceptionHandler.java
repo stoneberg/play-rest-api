@@ -2,6 +2,8 @@ package me.stone.rest.play.exception;
 
 import java.time.LocalDateTime;
 
+import javax.validation.ConstraintViolationException;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,6 +45,16 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 				request.getDescription(false));
 
 		return new ResponseEntity<>(customErrorDetails, HttpStatus.NOT_FOUND);
+	}
+	
+	// ConstraintViolationException
+	@ExceptionHandler(ConstraintViolationException.class)
+	public final ResponseEntity<Object> handleContraintViolationException(ConstraintViolationException ex,
+			WebRequest request) {
+		CustomErrorDetails customErrorDetails = new CustomErrorDetails(LocalDateTime.now(), ex.getMessage(),
+				request.getDescription(false));
+
+		return new ResponseEntity<>(customErrorDetails, HttpStatus.BAD_REQUEST);
 	}
 
 }
