@@ -1,6 +1,7 @@
 package me.stone.rest.play.users.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,10 +22,10 @@ public class UserService {
 
 	private final UserRepository userRepository;
 
-	// @todo return entity to return dto
 	// getAllUsers
-	public List<User> getAllUsers() {
-		return userRepository.findAll();
+	public List<FindDTO> getAllUsers() {
+		List<User> users = userRepository.findAll();
+		return users.stream().map(FindDTO::new).collect(Collectors.toList());
 	}
 
 	// createUser

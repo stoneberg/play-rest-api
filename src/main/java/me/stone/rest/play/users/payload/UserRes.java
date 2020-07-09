@@ -13,6 +13,7 @@ public class UserRes {
 
 	@Data
 	@NoArgsConstructor
+	@AllArgsConstructor
 	public static class FindDTO {
 
 		private Long id;
@@ -32,7 +33,7 @@ public class UserRes {
 		private String ssn;
 
 		private List<OrderDTO> orders = new ArrayList<>();
-
+		
 		public FindDTO(User entity) {
 			this.id = entity.getId();
 			this.username = entity.getUsername();
@@ -43,7 +44,7 @@ public class UserRes {
 			this.age = entity.getAge();
 			this.ssn = entity.getSsn();
 			this.orders = entity.getOrders().stream()
-					.map(order -> new OrderDTO(order.getId(), order.getDescription()))
+					.map(order -> new OrderDTO(order.getId(), order.getName(), order.getDescription()))
 					.collect(Collectors.toList());
 		}
 
@@ -53,10 +54,9 @@ public class UserRes {
 	@NoArgsConstructor
 	@AllArgsConstructor
 	public static class OrderDTO {
-
 		private Long id;
+		private String name;
 		private String description;
-
 	}
 
 }
