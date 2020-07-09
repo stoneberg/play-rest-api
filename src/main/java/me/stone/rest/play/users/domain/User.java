@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.hateoas.RepresentationModel;
 import org.springframework.util.StringUtils;
 
 import lombok.AccessLevel;
@@ -23,16 +24,16 @@ import me.stone.rest.play.order.domain.Order;
 import me.stone.rest.play.users.payload.UserReq.UpdateDTO;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper=false)
 @ToString
 @Getter
 @Entity
 @Table(name = "users")
-public class User {
+public class User extends RepresentationModel<User> {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long userId;
 	
 	@Column(name = "user_name", nullable = false, unique = true, length = 50)
 	private String username;

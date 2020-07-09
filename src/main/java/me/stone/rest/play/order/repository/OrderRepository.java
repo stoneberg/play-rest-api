@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import me.stone.rest.play.order.domain.Order;
 
 public interface OrderRepository extends JpaRepository<Order, Long> {
-	List<Order> findAllByUserId(Long userId);
-	Optional<Order> findByIdAndUserId(Long orderId, Long userId);
+	// if User.id -> User.userId then  findAllByUserId -> findAllByUserUserId
+	List<Order> findAllByUserUserId(Long userId);
+	// if Order.id, User.id -> Order.orderId, User.userId then  findByIdAndUserId -> findByOrderIdAndUserUserId
+	Optional<Order> findByOrderIdAndUserUserId(Long orderId, Long userId);
 }

@@ -35,7 +35,7 @@ public class UserRes {
 		private List<OrderDTO> orders = new ArrayList<>();
 		
 		public FindDTO(User entity) {
-			this.id = entity.getId();
+			this.id = entity.getUserId();
 			this.username = entity.getUsername();
 			this.firstname = entity.getFirstname();
 			this.lastname = entity.getLastname();
@@ -44,7 +44,7 @@ public class UserRes {
 			this.age = entity.getAge();
 			this.ssn = entity.getSsn();
 			this.orders = entity.getOrders().stream()
-					.map(order -> new OrderDTO(order.getId(), order.getName(), order.getDescription()))
+					.map(order -> new OrderDTO(order.getOrderId(), order.getName(), order.getDescription()))
 					.collect(Collectors.toList());
 		}
 

@@ -18,7 +18,7 @@ public class OrderRes {
 		
 		public FindDTO(Order entity) {
 			super();
-			this.id = entity.getId();
+			this.id = entity.getOrderId();
 			this.name = entity.getName();
 			this.description = entity.getDescription();
 			this.username = entity.getUser().getUsername();
