@@ -22,7 +22,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
 		CustomErrorDetails customErrorDetails = new CustomErrorDetails(LocalDateTime.now(),
-				"MethodArgumentNotValid Exception", ex.getMessage());
+				"MethodArgumentNotValidException  in CGEH", ex.getMessage());
 
 		return new ResponseEntity<>(customErrorDetails, HttpStatus.BAD_REQUEST);
 	}
@@ -32,20 +32,20 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 	protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
 		CustomErrorDetails customErrorDetails = new CustomErrorDetails(LocalDateTime.now(),
-				"HttpRequestMethodNotSupported Exception", ex.getMessage());
+				"HttpRequestMethodNotSupportedException in CGEH", ex.getMessage());
 
 		return new ResponseEntity<>(customErrorDetails, HttpStatus.METHOD_NOT_ALLOWED);
 	}
 
 	// UsernameNotFoundException
-//	@ExceptionHandler(UsernameNotFoundException.class)
-//	public final ResponseEntity<Object> handleUsernameNotFoundException(UsernameNotFoundException ex,
-//			WebRequest request) {
-//		CustomErrorDetails customErrorDetails = new CustomErrorDetails(LocalDateTime.now(), ex.getMessage(),
-//				request.getDescription(false));
-//
-//		return new ResponseEntity<>(customErrorDetails, HttpStatus.NOT_FOUND);
-//	}
+	@ExceptionHandler(UsernameNotFoundException.class)
+	public final ResponseEntity<Object> handleUsernameNotFoundException(UsernameNotFoundException ex,
+			WebRequest request) {
+		CustomErrorDetails customErrorDetails = new CustomErrorDetails(LocalDateTime.now(), ex.getMessage(),
+				request.getDescription(false));
+
+		return new ResponseEntity<>(customErrorDetails, HttpStatus.NOT_FOUND);
+	}
 	
 	// ConstraintViolationException
 	@ExceptionHandler(ConstraintViolationException.class)
