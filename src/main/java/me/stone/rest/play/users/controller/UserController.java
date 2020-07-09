@@ -1,5 +1,7 @@
 package me.stone.rest.play.users.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +38,7 @@ public class UserController {
 	}
 	
 	@PostMapping(path = "/users")
-	public ResponseEntity<?> createUser(@RequestBody CreateDTO dto, UriComponentsBuilder builder) {
+	public ResponseEntity<?> createUser(@Valid @RequestBody CreateDTO dto, UriComponentsBuilder builder) {
 		try {
 			Long id = userService.createUser(dto.toEntity());
 			HttpHeaders headers = new HttpHeaders();
