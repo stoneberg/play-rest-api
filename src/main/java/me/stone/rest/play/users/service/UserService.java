@@ -21,6 +21,7 @@ public class UserService {
 
 	private final UserRepository userRepository;
 
+	// @todo return entity to return dto
 	// getAllUsers
 	public List<User> getAllUsers() {
 		return userRepository.findAll();

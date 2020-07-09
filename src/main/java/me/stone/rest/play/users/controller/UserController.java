@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -30,18 +31,18 @@ import me.stone.rest.play.users.service.UserService;
 @RequiredArgsConstructor
 @Validated // @Min(1)
 @RestController
-//@RequestMapping("/users")
+@RequestMapping("/users")
 public class UserController {
 	
 	private final UserService userService;
 	
 	
-	@GetMapping(path = "/users")
+	@GetMapping
 	public ResponseEntity<?> getAllUsers() {
 		return ResponseEntity.ok(userService.getAllUsers());
 	}
 	
-	@PostMapping(path = "/users")
+	@PostMapping
 	public ResponseEntity<?> createUser(@Valid @RequestBody CreateDTO dto, UriComponentsBuilder builder) {
 		try {
 			Long id = userService.createUser(dto.toEntity());
@@ -53,7 +54,7 @@ public class UserController {
 		}
 	}
 	
-	@GetMapping(path = "/users/{id}")
+	@GetMapping(path = "/{id}")
 	public ResponseEntity<?> getUserById(@PathVariable("id") @Min(1) Long id) {
 		try {
 			return ResponseEntity.ok(userService.getUserById(id));
@@ -62,7 +63,7 @@ public class UserController {
 		}
 	}
 	
-	@PutMapping(path = "/users/{id}")
+	@PutMapping(path = "/{id}")
 	public ResponseEntity<?> updateUserById(@PathVariable("id") Long id, @RequestBody UpdateDTO dto) {
 		try {
 			return ResponseEntity.ok(userService.updateUserById(id, dto));
@@ -71,7 +72,7 @@ public class UserController {
 		}
 	}
 	
-	@DeleteMapping(path = "/users/{id}")
+	@DeleteMapping(path = "/{id}")
 	public ResponseEntity<?> deleteUserById(@PathVariable("id") Long id) {
 		try {
 			return ResponseEntity.ok(userService.deleteUserById(id));
@@ -80,7 +81,7 @@ public class UserController {
 		}
 	}
 	
-	@GetMapping(path = "/users/username/{username}")
+	@GetMapping(path = "/username/{username}")
 	public ResponseEntity<?> getUserByUsername(@PathVariable("username") String username) throws UsernameNotFoundException {
 		return ResponseEntity.ok(userService.getUserByUsername(username));
 	}
