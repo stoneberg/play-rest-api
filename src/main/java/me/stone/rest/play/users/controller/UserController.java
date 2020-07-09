@@ -19,6 +19,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.stone.rest.play.exception.UserExistsException;
 import me.stone.rest.play.exception.UserNotFoundException;
+import me.stone.rest.play.exception.UsernameNotFoundException;
 import me.stone.rest.play.users.payload.UserReq.CreateDTO;
 import me.stone.rest.play.users.payload.UserReq.UpdateDTO;
 import me.stone.rest.play.users.service.UserService;
@@ -77,12 +78,8 @@ public class UserController {
 	}
 	
 	@GetMapping(path = "/users/username/{username}")
-	public ResponseEntity<?> getUserByUsername(@PathVariable("username") String username) {
-		try {
-			return ResponseEntity.ok(userService.getUserByUsername(username));
-		} catch (UserNotFoundException e) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
-		}
+	public ResponseEntity<?> getUserByUsername(@PathVariable("username") String username) throws UsernameNotFoundException {
+		return ResponseEntity.ok(userService.getUserByUsername(username));
 	}
 	
 

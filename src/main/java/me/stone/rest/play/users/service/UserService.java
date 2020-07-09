@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import me.stone.rest.play.exception.UserExistsException;
 import me.stone.rest.play.exception.UserNotFoundException;
+import me.stone.rest.play.exception.UsernameNotFoundException;
 import me.stone.rest.play.users.domain.User;
 import me.stone.rest.play.users.payload.UserReq.UpdateDTO;
 import me.stone.rest.play.users.payload.UserRes.FindDTO;
@@ -73,9 +74,9 @@ public class UserService {
 	}
 
 	// findUserByUsername
-	public FindDTO getUserByUsername(String username) throws UserNotFoundException {
+	public FindDTO getUserByUsername(String username) throws UsernameNotFoundException {
 		User user = userRepository.findByUsername(username)
-				.orElseThrow(() -> new UserNotFoundException(String.format("Not Found User: Username=%s", username)));
+				.orElseThrow(() -> new UsernameNotFoundException(String.format("Not Found User: Username=%s", username)));
 		return new FindDTO(user);
 	}
 
