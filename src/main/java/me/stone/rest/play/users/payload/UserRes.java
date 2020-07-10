@@ -6,39 +6,48 @@ import java.util.stream.Collectors;
 
 import org.springframework.hateoas.RepresentationModel;
 
-import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonView;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import me.stone.rest.play.users.domain.User;
+import me.stone.rest.play.users.view.Views;
 
 public class UserRes {
 
-	@JsonFilter(value = "userFilter")
 	@Data
 	@EqualsAndHashCode(callSuper=false)
 	@NoArgsConstructor
 	@AllArgsConstructor
 	public static class FindDTO extends RepresentationModel<FindDTO> {
 
+		@JsonView(Views.External.class)
 		private Long userId;
 
+		@JsonView(Views.External.class)
 		private String username;
 
+		@JsonView(Views.External.class)
 		private String firstname;
 
+		@JsonView(Views.External.class)
 		private String lastname;
 
+		@JsonView(Views.Internal.class)
 		private String role;
 
+		@JsonView(Views.Internal.class)
 		private String email;
 
+		@JsonView(Views.Internal.class)
 		private Integer age;
 
+		@JsonView(Views.Internal.class)
 		private String ssn;
 
+		@JsonView(Views.Internal.class)
 		private List<OrderDTO> orders = new ArrayList<>();
 
 		public FindDTO(User entity) {
@@ -61,8 +70,11 @@ public class UserRes {
 	@NoArgsConstructor
 	@AllArgsConstructor
 	public static class OrderDTO {
-		private Long id;
+		@JsonView(Views.Internal.class)
+		private Long orderId;
+		@JsonView(Views.Internal.class)
 		private String name;
+		@JsonView(Views.Internal.class)
 		private String description;
 	}
 
