@@ -17,15 +17,9 @@ public interface UserMapper {
 	// UserEntity To UserDTO
 	@Mapping(source = "id", target = "userId")
 	@Mapping(source = "email", target = "emailAddress")
-//	@Mapping(source = "orders.id", target = "orders.orderId")
-//	@Mapping(source = "orders.name", target = "orders.ordername")
 	FindMsDTO userToUserDTO(User user);
 	
 	// List<UserEntity> To List<UserDTO>
-	@Mapping(source = "id", target = "userId")
-	@Mapping(source = "email", target = "emailAddress")
-//	@Mapping(source = "orders.id", target = "orders.orderId")
-//	@Mapping(source = "orders.name", target = "orders.ordername")
 	List<FindMsDTO> usersToUserDTOs(List<User> users);
     
 }

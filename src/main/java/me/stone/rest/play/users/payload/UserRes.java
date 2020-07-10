@@ -130,7 +130,7 @@ public class UserRes {
 	@AllArgsConstructor
 	public static class OrderMsDTO {
 		private Long orderId;  // id -> orderId auto convert
-		private String ordername;
+		private String name;
 		private String description;
 	}
 

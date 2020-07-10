@@ -31,7 +31,7 @@ public class UserMapStructService {
 	public FindMsDTO getUser(Long id) throws UserNotFoundException {
 		User user = userRepository.findById(id)
 				.orElseThrow(() -> new UserNotFoundException(String.format("Not Found User: Id=%s", id)));
-		return UserMapper.INSTANCE.userToUserDTO(user);
+		return userMapper.userToUserDTO(user);
 	}
 
 }
