@@ -23,18 +23,18 @@ public class OrderController {
 	private final OrderService orderService;
 	
 	@GetMapping(path = "/{userId}/orders")
-	public ResponseEntity<?> getAllOrdersByUserId(@PathVariable Long userId) {
-		return new ResponseEntity<>(orderService.getAllOrdersByUserId(userId), HttpStatus.OK);
+	public ResponseEntity<?> getAllOrders(@PathVariable Long userId) {
+		return new ResponseEntity<>(orderService.getAllOrders(userId), HttpStatus.OK);
 	}
 	
 	@PostMapping(path = "/{userId}/orders")
-	public ResponseEntity<?> createOrderByUserId(@PathVariable Long userId, @RequestBody CreateDTO dto) throws UserNotFoundException {
-		return new ResponseEntity<>(orderService.createOrderByUserId(userId, dto), HttpStatus.OK);
+	public ResponseEntity<?> createOrder(@PathVariable Long userId, @RequestBody CreateDTO dto) throws UserNotFoundException {
+		return new ResponseEntity<>(orderService.createOrder(userId, dto), HttpStatus.OK);
 	}
 	
 	@GetMapping(path = "/{userId}/orders/{orderId}")
-	public ResponseEntity<?> getOrderByIds(@PathVariable Long userId, @PathVariable Long orderId) throws ResourceNotFoundException {
-		return new ResponseEntity<>(orderService.getOrderByIds(userId, orderId), HttpStatus.OK);
+	public ResponseEntity<?> getOrder(@PathVariable Long userId, @PathVariable Long orderId) throws ResourceNotFoundException {
+		return new ResponseEntity<>(orderService.getOrder(userId, orderId), HttpStatus.OK);
 	}
 
 }

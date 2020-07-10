@@ -51,7 +51,7 @@ public class UserService {
 	}
 
 	// getUserByID
-	public FindDTO getUserById(Long id) throws UserNotFoundException {
+	public FindDTO getUser(Long id) throws UserNotFoundException {
 		User user = userRepository.findById(id)
 				.orElseThrow(() -> new UserNotFoundException(String.format("Not Found User: Id=%s", id)));
 		return new FindDTO(user);
@@ -59,7 +59,7 @@ public class UserService {
 
 	// updateUserById
 	@Transactional
-	public Long updateUserById(Long id, UpdateDTO dto) throws UserNotFoundException {
+	public Long updateUser(Long id, UpdateDTO dto) throws UserNotFoundException {
 		User user = userRepository.findById(id)
 				.orElseThrow(() -> new UserNotFoundException(String.format("Not Found User: Id=%s", id)));
 		user.updateUser(dto);
@@ -68,7 +68,7 @@ public class UserService {
 
 	// deleteUserById
 	@Transactional
-	public Long deleteUserById(Long id) throws UserNotFoundException {
+	public Long deleteUser(Long id) throws UserNotFoundException {
 		User user = userRepository.findById(id)
 				.orElseThrow(() -> new UserNotFoundException(String.format("Not Found User: Id=%s", id)));
 		userRepository.delete(user);

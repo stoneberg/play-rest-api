@@ -55,9 +55,9 @@ public class UserController {
 	}
 	
 	@GetMapping(path = "/{id}")
-	public ResponseEntity<?> getUserById(@PathVariable("id") @Min(1) Long id) {
+	public ResponseEntity<?> getUser(@PathVariable("id") @Min(1) Long id) {
 		try {
-			return ResponseEntity.ok(userService.getUserById(id));
+			return ResponseEntity.ok(userService.getUser(id));
 		} catch (UserNotFoundException e) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
 		}
@@ -66,7 +66,7 @@ public class UserController {
 	@PutMapping(path = "/{id}")
 	public ResponseEntity<?> updateUserById(@PathVariable("id") Long id, @RequestBody UpdateDTO dto) {
 		try {
-			return ResponseEntity.ok(userService.updateUserById(id, dto));
+			return ResponseEntity.ok(userService.updateUser(id, dto));
 		} catch (UserNotFoundException e) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
 		}
@@ -75,7 +75,7 @@ public class UserController {
 	@DeleteMapping(path = "/{id}")
 	public ResponseEntity<?> deleteUserById(@PathVariable("id") Long id) {
 		try {
-			return ResponseEntity.ok(userService.deleteUserById(id));
+			return ResponseEntity.ok(userService.deleteUser(id));
 		} catch (UserNotFoundException e) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
 		}

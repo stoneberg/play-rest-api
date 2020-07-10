@@ -20,6 +20,7 @@ import org.springframework.web.server.ResponseStatusException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.stone.rest.play.exception.UserNotFoundException;
+import me.stone.rest.play.order.controller.OrderHateoasController;
 import me.stone.rest.play.users.payload.UserRes.FindDTO;
 import me.stone.rest.play.users.service.UserService;
 
@@ -37,18 +38,25 @@ public class UserHateoasController {
 		List<FindDTO> users = userService.getAllUsers();
 		
 		for (FindDTO user : users) {
+			// selflink("href": "http://localhost:8080/hateoas/users/4")
 			Link selfLink = WebMvcLinkBuilder.linkTo(this.getClass()).slash(user.getUserId()).withSelfRel();
 			user.add(selfLink);
+			// relationship link("http://localhost:8080/hateoas/users/4/orders")
+			Object orders = WebMvcLinkBuilder.methodOn(OrderHateoasController.class).getAllOrders(user.getUserId());
+			Link ordersLink = WebMvcLinkBuilder.linkTo(orders).withRel("all-orders");
+			user.add(ordersLink);
 		}
 		
-		CollectionModel<FindDTO> resources = CollectionModel.of(users);
+		// selflink for getAllUsers("href": "http://localhost:8080/hateoas/users")
+		Link selfLinkForAllUsers = WebMvcLinkBuilder.linkTo(this.getClass()).withSelfRel();
+		CollectionModel<FindDTO> resources = CollectionModel.of(users, selfLinkForAllUsers);
 	    return ResponseEntity.ok(resources);
 	}
 
 	@GetMapping(path = "/{id}")
-	public ResponseEntity<?> getUserById(@PathVariable("id") @Min(1) Long id) {
+	public ResponseEntity<?> getUser(@PathVariable("id") @Min(1) Long id) {
 		try {
-			FindDTO user = userService.getUserById(id);
+			FindDTO user = userService.getUser(id);
 			Link selfLink = WebMvcLinkBuilder.linkTo(this.getClass()).slash(id).withSelfRel();
 			user.add(selfLink);
 			EntityModel<FindDTO> resource = EntityModel.of(user);

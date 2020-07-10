@@ -24,14 +24,14 @@ public class OrderService {
 	private final OrderRepository orderRepository;
 	
 	// find All Orders By UserId
-	public List<FindDTO> getAllOrdersByUserId(Long userId) {
+	public List<FindDTO> getAllOrders(Long userId) {
 		List<Order> orders = orderRepository.findAllByUserId(userId);
 		return orders.stream().map(order -> new FindDTO(order.getId(), order.getName(), order.getDescription()))
 		.collect(Collectors.toList());
 	}
 
 	// create User Order
-	public Long createOrderByUserId(Long userId, CreateDTO dto) throws UserNotFoundException {
+	public Long createOrder(Long userId, CreateDTO dto) throws UserNotFoundException {
 		User user = userRepository.findById(userId)
 				.orElseThrow(() -> new UserNotFoundException(String.format("Not Found User: Id=%s", userId)));
 		
@@ -42,7 +42,7 @@ public class OrderService {
 	}
 
 	// get Order by UserId and OrderId
-	public FindDTO getOrderByIds(Long userId, Long orderId) throws ResourceNotFoundException {
+	public FindDTO getOrder(Long userId, Long orderId) throws ResourceNotFoundException {
 		Order order = orderRepository.findByIdAndUserId(orderId, userId).orElseThrow(() -> new ResourceNotFoundException(String.format("Resource Not Found: orderId=%s", orderId)));
 		return new FindDTO(order);
 	}
