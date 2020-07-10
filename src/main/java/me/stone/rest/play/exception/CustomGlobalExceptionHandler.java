@@ -17,17 +17,17 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-	// MethodArgumentNotValidException
+	// MethodArgumentNotValidException(@Valid failed)
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
 		CustomErrorDetails customErrorDetails = new CustomErrorDetails(LocalDateTime.now(),
-				"MethodArgumentNotValidException  in CGEH", ex.getMessage());
+				"MethodArgumentNotValidException in CGEH", ex.getMessage());
 
 		return new ResponseEntity<>(customErrorDetails, HttpStatus.BAD_REQUEST);
 	}
 
-	// HttpRequestMethodNotSupportedException
+	// HttpRequestMethodNotSupportedException(405)
 	@Override
 	protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
