@@ -12,6 +12,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -50,6 +51,26 @@ public class UserMappingJacksonController {
 			
 			FilterProvider filterProvider = new SimpleFilterProvider()
 					.addFilter("userFilter", SimpleBeanPropertyFilter.filterOutAllExcept(fileds));
+			
+		    MappingJacksonValue mapper = new MappingJacksonValue(user);
+		    mapper.setFilters(filterProvider);
+			
+			return ResponseEntity.ok(mapper);
+			
+		} catch (UserNotFoundException e) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+		}
+	}
+	
+	
+	@GetMapping(path = "/params/{id}")
+	public ResponseEntity<?> getUser2(@PathVariable("id") @Min(1) Long id, @RequestParam Set<String> fields) {
+		try {
+			
+			FindDTO user = userService.getUser(id);
+			
+			FilterProvider filterProvider = new SimpleFilterProvider()
+					.addFilter("userFilter", SimpleBeanPropertyFilter.filterOutAllExcept(fields));
 			
 		    MappingJacksonValue mapper = new MappingJacksonValue(user);
 		    mapper.setFilters(filterProvider);
