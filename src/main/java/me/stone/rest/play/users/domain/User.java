@@ -22,9 +22,9 @@ import lombok.ToString;
 import me.stone.rest.play.order.domain.Order;
 import me.stone.rest.play.users.payload.UserReq.UpdateDTO;
 
+//@EqualsAndHashCode(callSuper=false)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@EqualsAndHashCode(callSuper=false)
-@ToString
+@ToString(exclude = "orders")
 @Getter
 @Entity
 @Table(name = "users")
@@ -54,6 +54,9 @@ public class User {
 	
 	@Column(name = "ssn", nullable = false, unique = true, length = 50)
 	private String ssn;
+	
+	@Column(name = "address", nullable = false, length = 100)
+	private String address;
 	
 	@OneToMany(mappedBy = "user")
 	private List<Order> orders = new ArrayList<>();
