@@ -27,12 +27,13 @@ public class LogAspect {
 	
 	//private static final Logger log = LoggerFactory.getLogger(LogAspect.class);
     
-    @Around("execution(* me.stone.rest.play.*.controller.*.*(..)) "
-            + "|| execution(* me.stone.rest.play.*.service.*.*(..))"
-            + "|| execution(* me.stone.rest.play.*.repository.*.*(..))")
+//    @Around("execution(* me.stone.rest.play.*.controller.*.*(..)) "
+//            + "|| execution(* me.stone.rest.play.*.service.*.*(..))"
+//            + "|| execution(* me.stone.rest.play.*.repository.*.*(..))")
+    @Around("execution(* me.stone.rest.play.*.controller.*.*(..))")
     public Object controllerLog(ProceedingJoinPoint pjp) throws Throwable {
         log.info("#################################################################################");
-        log.info("◈[LogAspect : Start] - {}/{}", pjp.getSignature().getDeclaringTypeName(), pjp.getSignature().getName());
+        log.info("@[LogAspect : Start] - {}/{}", pjp.getSignature().getDeclaringTypeName(), pjp.getSignature().getName());
         long startTime = System.currentTimeMillis();
         
         Object[] signatrueArgs = pjp.getArgs();
@@ -42,8 +43,8 @@ public class LogAspect {
         
         Object result = pjp.proceed();
         long endTime = System.currentTimeMillis();
-        log.info("◈{} took {} seconds", pjp.getSignature().getName(), TimeUnit.MILLISECONDS.toSeconds(endTime - startTime));
-        log.info("◈[LogAspect : End] - {}/{}", pjp.getSignature().getDeclaringTypeName(), pjp.getSignature().getName());
+        log.info("@{} took {} seconds", pjp.getSignature().getName(), TimeUnit.MILLISECONDS.toSeconds(endTime - startTime));
+        log.info("@[LogAspect : End] - {}/{}", pjp.getSignature().getDeclaringTypeName(), pjp.getSignature().getName());
         log.info("#################################################################################");
         return result;
     }
@@ -58,7 +59,7 @@ public class LogAspect {
      */
     public void printJsonFormatParamLog(ProceedingJoinPoint pjp, Object arg) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        log.info("◈[{}] parameters ==>\r\n####{}", pjp.getSignature().getName(), !StringUtils.isBlank(gson.toJson(arg)) ? gson.toJson(arg) : "Empty");
+        log.info("@Request [{}]'s parameters are\r\n ===> # {} #", pjp.getSignature().getName(), !StringUtils.isBlank(gson.toJson(arg)) ? gson.toJson(arg) : "Empty");
     }
 
 

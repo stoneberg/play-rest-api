@@ -4,7 +4,7 @@ import org.hibernate.engine.jdbc.internal.BasicFormatterImpl;
 import org.hibernate.engine.jdbc.internal.Formatter;
 import com.p6spy.engine.spy.appender.MessageFormattingStrategy;
 
-public class PrettySqlMultiLineFormatUtil implements MessageFormattingStrategy {
+public class PrettySqlMultiLineFormatter implements MessageFormattingStrategy {
     private static final Formatter FORMATTER = new BasicFormatterImpl();
 
     @Override
