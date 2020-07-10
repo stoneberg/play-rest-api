@@ -1,5 +1,6 @@
 package me.stone.rest.play.users.payload;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
@@ -11,7 +12,7 @@ public class UserReq {
 	@Data
 	public static class CreateDTO {
 		
-		@NotEmpty(message = "username is mandatory field. please provide username")
+		@NotBlank(message = "username is mandatory field. please provide username")
 		private String username;
 		
 		@Size(min = 2, message = "firstname should have at least 2 characters")
