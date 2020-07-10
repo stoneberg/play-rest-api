@@ -15,17 +15,15 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 
 import lombok.extern.slf4j.Slf4j;
 
-@ControllerAdvice
-@ResponseBody
 @Slf4j
+@RestControllerAdvice
 public class CustomGlobalExceptionController {
 
 	@ExceptionHandler(UsernameNotFoundException.class)
@@ -91,7 +89,7 @@ public class CustomGlobalExceptionController {
 	// HttpRequestMethodNotSupportedException(405)
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-	protected ErrorResponse handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException ex, WebRequest request) {
+	protected ErrorResponse handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException ex, WebRequest request) {
     	 return buildError(ErrorCode.METHOD_NOT_ALLOWED, request);
 	}
 
