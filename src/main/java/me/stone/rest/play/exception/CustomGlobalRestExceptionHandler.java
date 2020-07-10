@@ -24,7 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestControllerAdvice
-public class CustomGlobalExceptionController {
+public class CustomGlobalRestExceptionHandler {
 
 	@ExceptionHandler(UsernameNotFoundException.class)
 	@ResponseStatus(HttpStatus.NOT_FOUND)
