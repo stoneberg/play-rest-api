@@ -14,6 +14,7 @@ public class ErrorResponse {
 
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime timestamp;
+	private Boolean isSuccess;
 	private String message;
 	private String code;
 	private int status;
@@ -21,8 +22,9 @@ public class ErrorResponse {
 	private List<FieldError> errors = new ArrayList<>();
 
 	@Builder
-	public ErrorResponse(LocalDateTime timestamp, String message, String code, int status, String path, List<FieldError> errors) {
+	public ErrorResponse(LocalDateTime timestamp, Boolean isSuccess, String message, String code, int status, String path, List<FieldError> errors) {
 		this.timestamp = timestamp;
+		this.isSuccess = isSuccess;
 		this.message = message;
 		this.code = code;
 		this.status = status;
