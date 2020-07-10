@@ -28,21 +28,31 @@ import lombok.extern.slf4j.Slf4j;
 @RestControllerAdvice
 public class CustomGlobalRestExceptionHandler {
 
+    @ExceptionHandler(UserNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorResponse handleUserNotFoundException(UserNotFoundException ex, WebRequest request) {
+        return buildError(ErrorCode.USER_NOT_FOUND, ex.getMessage(), request);
+    }
+    
     @ExceptionHandler(UsernameNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorResponse handleUsernameNotFoundException(UsernameNotFoundException ex, WebRequest request) {
-        final ErrorCode userNotFound = ErrorCode.USER_NOT_FOUND;
-        return buildError(userNotFound, request, ex.getMessage());
+        return buildError(ErrorCode.USER_NOT_FOUND, ex.getMessage(), request);
+    }
+    
+    @ExceptionHandler(ResourceNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorResponse handleResourceNotFoundException(ResourceNotFoundException ex, WebRequest request) {
+        return buildError(ErrorCode.RESOURCE_NOT_FOUND, request);
     }
     
     @ExceptionHandler(UserExistsException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse handleUserExistsException(UserExistsException ex, WebRequest request) {
-        final ErrorCode userNotFound = ErrorCode.USER_EXISTS;
-        return buildError(userNotFound, request, ex.getMessage());
+        return buildError(ErrorCode.USER_EXISTS, ex.getMessage(), request);
     }
     
-    @ExceptionHandler(value = {MethodArgumentNotValidException.class})
+    @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     protected ErrorResponse handleMethodArgumentNotValidException(MethodArgumentNotValidException ex, WebRequest request) {
         final List<ErrorResponse.FieldError> fieldErrors = getFieldErrors(ex.getBindingResult());
@@ -52,7 +62,7 @@ public class CustomGlobalRestExceptionHandler {
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     protected ErrorResponse handleMethodArgumentTypeMismatchExceptio(MethodArgumentTypeMismatchException ex, WebRequest request) {
-    	return buildError(ErrorCode.INPUT_VALUE_INVALID, request, ex.getMessage());
+    	return buildError(ErrorCode.INPUT_VALUE_INVALID, ex.getMessage(), request);
     }
 
     @ExceptionHandler(BindException.class)
@@ -66,10 +76,10 @@ public class CustomGlobalRestExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse handleContraintViolationException(ConstraintViolationException ex, WebRequest request) {
         final ErrorCode errorCode = ErrorCode.INPUT_VALUE_INVALID;
+        final String message = getResultMessage(ex.getConstraintViolations().iterator());
         log.error(errorCode.getMessage(), ex.getConstraintViolations());
-        return buildError(errorCode, request, getResultMessage(ex.getConstraintViolations().iterator()));
+        return buildError(errorCode, message, request);
     }
-    
 
 //    @ExceptionHandler(EmailDuplicationException.class)
 //    @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -82,7 +92,7 @@ public class CustomGlobalRestExceptionHandler {
     @ExceptionHandler(DataIntegrityViolationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     protected ErrorResponse handleDataIntegrityViolationException(DataIntegrityViolationException ex, WebRequest request) {
-        log.error(ex.getMessage());
+    	log.error("@DataIntegrityViolationException::{}", ExceptionUtils.getMessage(ex));
         return buildError(ErrorCode.INPUT_VALUE_INVALID, request);
     }
 
@@ -98,7 +108,8 @@ public class CustomGlobalRestExceptionHandler {
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     protected ErrorResponse handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException ex, WebRequest request) {
-         return buildError(ErrorCode.METHOD_NOT_ALLOWED, request);
+    	log.error("@HttpRequestMethodNotSupportedException::{}", ExceptionUtils.getMessage(ex)); 
+    	return buildError(ErrorCode.METHOD_NOT_ALLOWED, request);
     }
     
     @ExceptionHandler(Exception.class)
@@ -137,7 +148,7 @@ public class CustomGlobalRestExceptionHandler {
                 .build();
     }
     
-    private ErrorResponse buildError(ErrorCode errorCode, WebRequest request, String message) {
+    private ErrorResponse buildError(ErrorCode errorCode, String message, WebRequest request) {
         return ErrorResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .isSuccess(Boolean.FALSE)
