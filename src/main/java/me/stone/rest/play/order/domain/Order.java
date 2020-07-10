@@ -26,11 +26,11 @@ import me.stone.rest.play.users.domain.User;
 @Getter
 @Entity
 @Table(name = "orders")
-public class Order extends RepresentationModel<Order> {
+public class Order {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long orderId;
+	private Long id;
 	
 	@Column(name = "order_name", nullable = false, length = 50)
 	private String name;

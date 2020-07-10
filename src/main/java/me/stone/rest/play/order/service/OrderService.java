@@ -25,8 +25,8 @@ public class OrderService {
 	
 	// find All Orders By UserId
 	public List<FindDTO> getAllOrdersByUserId(Long userId) {
-		List<Order> orders = orderRepository.findAllByUserUserId(userId);
-		return orders.stream().map(order -> new FindDTO(order.getOrderId(), order.getName(), order.getDescription()))
+		List<Order> orders = orderRepository.findAllByUserId(userId);
+		return orders.stream().map(order -> new FindDTO(order.getId(), order.getName(), order.getDescription()))
 		.collect(Collectors.toList());
 	}
 
@@ -38,12 +38,12 @@ public class OrderService {
 		Order order = dto.toEntity();
 		order.addUser(user);
 		
-		return orderRepository.save(order).getOrderId();
+		return orderRepository.save(order).getId();
 	}
 
 	// get Order by UserId and OrderId
 	public FindDTO getOrderByIds(Long userId, Long orderId) throws ResourceNotFoundException {
-		Order order = orderRepository.findByOrderIdAndUserUserId(orderId, userId).orElseThrow(() -> new ResourceNotFoundException(String.format("Resource Not Found: orderId=%s", orderId)));
+		Order order = orderRepository.findByIdAndUserId(orderId, userId).orElseThrow(() -> new ResourceNotFoundException(String.format("Resource Not Found: orderId=%s", orderId)));
 		return new FindDTO(order);
 	}
 

@@ -4,19 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.hateoas.RepresentationModel;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import me.stone.rest.play.users.domain.User;
 
 public class UserRes {
 
 	@Data
+	@EqualsAndHashCode(callSuper=false)
 	@NoArgsConstructor
 	@AllArgsConstructor
-	public static class FindDTO {
+	public static class FindDTO extends RepresentationModel<FindDTO> {
 
-		private Long id;
+		private Long userId;
 
 		private String username;
 
@@ -33,9 +37,9 @@ public class UserRes {
 		private String ssn;
 
 		private List<OrderDTO> orders = new ArrayList<>();
-		
+
 		public FindDTO(User entity) {
-			this.id = entity.getUserId();
+			this.userId = entity.getId();
 			this.username = entity.getUsername();
 			this.firstname = entity.getFirstname();
 			this.lastname = entity.getLastname();
@@ -44,7 +48,7 @@ public class UserRes {
 			this.age = entity.getAge();
 			this.ssn = entity.getSsn();
 			this.orders = entity.getOrders().stream()
-					.map(order -> new OrderDTO(order.getOrderId(), order.getName(), order.getDescription()))
+					.map(order -> new OrderDTO(order.getId(), order.getName(), order.getDescription()))
 					.collect(Collectors.toList());
 		}
 

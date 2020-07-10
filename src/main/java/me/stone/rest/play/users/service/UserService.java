@@ -47,7 +47,7 @@ public class UserService {
 			throw new UserExistsException(String.format("User Ssn Already Exists: Ssn=%s", entity.getSsn()));
 		}
 
-		return userRepository.save(entity).getUserId();
+		return userRepository.save(entity).getId();
 	}
 
 	// getUserByID

@@ -29,11 +29,11 @@ import me.stone.rest.play.users.payload.UserReq.UpdateDTO;
 @Getter
 @Entity
 @Table(name = "users")
-public class User extends RepresentationModel<User> {
+public class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long userId;
+	private Long id;
 	
 	@Column(name = "user_name", nullable = false, unique = true, length = 50)
 	private String username;
