@@ -6,6 +6,9 @@ import java.util.stream.Collectors;
 
 import org.springframework.hateoas.RepresentationModel;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -15,6 +18,7 @@ import me.stone.rest.play.users.domain.User;
 public class UserRes {
 
 	@Data
+	@JsonIgnoreProperties({"firstname", "lastname"})
 	@EqualsAndHashCode(callSuper=false)
 	@NoArgsConstructor
 	@AllArgsConstructor
@@ -34,6 +38,7 @@ public class UserRes {
 
 		private Integer age;
 
+		@JsonIgnore
 		private String ssn;
 
 		private List<OrderDTO> orders = new ArrayList<>();
