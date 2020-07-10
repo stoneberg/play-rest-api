@@ -77,5 +77,33 @@ public class UserRes {
 		@JsonView(Views.Internal.class)
 		private String description;
 	}
+	
+	/**
+	 * ModelMapper Test
+	 * @author stone
+	 */
+	@Data
+	@NoArgsConstructor
+	@AllArgsConstructor
+	public static class FindMmDTO {
+		private Long userId; // id -> userId auto convert
+		private String username;
+		private String firstname;
+		private String lastname;
+		//private String role;
+		private String email;
+		private Integer age;
+		//private String ssn;
+		private List<OrderMmDTO> orders = new ArrayList<>();
+	}
+
+	@Data
+	@NoArgsConstructor
+	@AllArgsConstructor
+	public static class OrderMmDTO {
+		private Long orderId;  // id -> orderId auto convert
+		//private String name;
+		private String description;
+	}
 
 }

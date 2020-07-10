@@ -2,6 +2,7 @@ package me.stone.rest.play.config;
 
 import java.util.Locale;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
@@ -11,7 +12,7 @@ import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver;
 
 @EnableWebMvc
 @Configuration
-public class PlayRestConfig {
+public class PlayRestAppConfig {
 
 	@Bean
 	public LocaleResolver localeResolver() {
@@ -28,4 +29,10 @@ public class PlayRestConfig {
 		messageSource.setCacheSeconds(180);
 		return messageSource;
 	}
+	
+	@Bean
+	public ModelMapper modelMapper() {
+		return new ModelMapper();
+	}
+	
 }
