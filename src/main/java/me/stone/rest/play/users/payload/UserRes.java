@@ -90,10 +90,10 @@ public class UserRes {
 		private String username;
 		private String firstname;
 		private String lastname;
-		//private String role;
+		private String role;
 		private String email;
 		private Integer age;
-		//private String ssn;
+		private String ssn;
 		private List<OrderMmDTO> orders = new ArrayList<>();
 	}
 
@@ -102,7 +102,35 @@ public class UserRes {
 	@AllArgsConstructor
 	public static class OrderMmDTO {
 		private Long orderId;  // id -> orderId auto convert
-		//private String name;
+		private String name;
+		private String description;
+	}
+	
+	/**
+	 * MapStruct Test
+	 * @author stone
+	 */
+	@Data
+	@NoArgsConstructor
+	@AllArgsConstructor
+	public static class FindMsDTO {
+		private Long userId; // id -> userId auto convert
+		private String username;
+		private String firstname;
+		private String lastname;
+		private String role;
+		private String emailAddress;
+		private Integer age;
+		private String ssn;
+		private List<OrderMsDTO> orders = new ArrayList<>();
+	}
+
+	@Data
+	@NoArgsConstructor
+	@AllArgsConstructor
+	public static class OrderMsDTO {
+		private Long orderId;  // id -> orderId auto convert
+		private String ordername;
 		private String description;
 	}
 
