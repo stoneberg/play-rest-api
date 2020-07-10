@@ -29,7 +29,7 @@ import me.stone.rest.play.users.service.UserService;
 
 @Slf4j
 @RequiredArgsConstructor
-@Validated // @Min(1)
+@Validated // @Min(1) for method parameter validation not bean validation
 @RestController
 @RequestMapping("/users")
 public class UserController {
