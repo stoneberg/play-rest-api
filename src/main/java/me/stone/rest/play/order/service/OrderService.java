@@ -6,8 +6,8 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
-import me.stone.rest.play.exception.ResourceNotFoundException;
-import me.stone.rest.play.exception.UserNotFoundException;
+import me.stone.rest.play.common.exception.ResourceNotFoundException;
+import me.stone.rest.play.common.exception.UserNotFoundException;
 import me.stone.rest.play.order.domain.Order;
 import me.stone.rest.play.order.payload.OrderReq.CreateDTO;
 import me.stone.rest.play.order.payload.OrderRes.FindDTO;

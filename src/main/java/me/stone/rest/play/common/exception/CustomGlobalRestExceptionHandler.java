@@ -1,4 +1,4 @@
-package me.stone.rest.play.exception;
+package me.stone.rest.play.common.exception;
 
 import java.time.LocalDateTime;
 import java.util.Iterator;

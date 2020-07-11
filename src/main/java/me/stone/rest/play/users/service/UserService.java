@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
-import me.stone.rest.play.exception.UserExistsException;
-import me.stone.rest.play.exception.UserNotFoundException;
-import me.stone.rest.play.exception.UsernameNotFoundException;
+import me.stone.rest.play.common.exception.UserExistsException;
+import me.stone.rest.play.common.exception.UserNotFoundException;
+import me.stone.rest.play.common.exception.UsernameNotFoundException;
 import me.stone.rest.play.users.domain.User;
 import me.stone.rest.play.users.payload.UserReq.UpdateDTO;
 import me.stone.rest.play.users.payload.UserRes.FindDTO;

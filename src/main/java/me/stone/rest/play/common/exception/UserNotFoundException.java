@@ -1,4 +1,4 @@
-package me.stone.rest.play.exception;
+package me.stone.rest.play.common.exception;
 
 public class UserNotFoundException extends Exception {
 

@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
-import me.stone.rest.play.exception.ResourceNotFoundException;
-import me.stone.rest.play.exception.UserNotFoundException;
+import me.stone.rest.play.common.exception.ResourceNotFoundException;
+import me.stone.rest.play.common.exception.UserNotFoundException;
 import me.stone.rest.play.order.payload.OrderReq.CreateDTO;
 import me.stone.rest.play.order.service.OrderService;
 

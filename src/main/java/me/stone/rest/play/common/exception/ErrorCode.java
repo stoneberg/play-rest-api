@@ -1,4 +1,4 @@
-package me.stone.rest.play.exception;
+package me.stone.rest.play.common.exception;
 
 import org.springframework.http.HttpStatus;
 

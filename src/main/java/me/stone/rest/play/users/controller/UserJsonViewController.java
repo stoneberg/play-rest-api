@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import me.stone.rest.play.exception.UserNotFoundException;
+import me.stone.rest.play.common.exception.UserNotFoundException;
 import me.stone.rest.play.users.service.UserService;
 import me.stone.rest.play.users.view.Views;
 

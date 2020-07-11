@@ -1,4 +1,4 @@
-package me.stone.rest.play.config;
+package me.stone.rest.play.common.config;
 
 import java.util.Locale;
 
