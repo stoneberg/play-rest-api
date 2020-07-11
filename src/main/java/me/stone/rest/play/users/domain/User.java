@@ -55,7 +55,7 @@ public class User {
 	@Column(name = "ssn", nullable = false, unique = true, length = 50)
 	private String ssn;
 	
-	@Column(name = "address", nullable = false, length = 100)
+	@Column(name = "address", length = 100)
 	private String address;
 	
 	@OneToMany(mappedBy = "user")
@@ -63,7 +63,7 @@ public class User {
 
 	@Builder
 	public User(String username, String firstname, String lastname, String email, Integer age, String role,
-			String ssn) {
+			String ssn, String address) {
 		super();
 		this.username = username;
 		this.firstname = firstname;
@@ -72,6 +72,7 @@ public class User {
 		this.age = age;
 		this.role = role;
 		this.ssn = ssn;
+		this.address = address;
 	}
 
 	// update user information by UserDTO
@@ -102,6 +103,10 @@ public class User {
 		
 		if (StringUtils.hasText(dto.getSsn())) {
 			this.ssn = dto.getSsn();
+		}
+		
+		if (StringUtils.hasText(dto.getAddress())) {
+			this.address = dto.getAddress();
 		}
 	}
 

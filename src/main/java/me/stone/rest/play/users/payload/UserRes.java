@@ -48,6 +48,8 @@ public class UserRes {
 
 		@JsonView(Views.Internal.class)
 		private String ssn;
+		
+		private String addrees;
 
 		@JsonView(Views.Internal.class)
 		private List<OrderDTO> orders = new ArrayList<>();
@@ -62,6 +64,7 @@ public class UserRes {
 			this.email = entity.getEmail();
 			this.age = entity.getAge();
 			this.ssn = entity.getSsn();
+			this.addrees = entity.getAddress();
 			this.orders = entity.getOrders().stream()
 					.map(order -> new OrderDTO(order.getId(), order.getName(), order.getDescription()))
 					.collect(Collectors.toList());

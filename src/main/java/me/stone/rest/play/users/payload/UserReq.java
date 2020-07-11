@@ -28,6 +28,8 @@ public class UserReq {
 		private Integer age;
 		
 		private String ssn;
+		
+		private String address;
 
 		public User toEntity() {
 			return User.builder()
@@ -38,6 +40,7 @@ public class UserReq {
 					.email(this.email)
 					.age(this.age)
 					.ssn(this.ssn)
+					.address(this.address)
 					.build();
 		}
 		
@@ -60,6 +63,8 @@ public class UserReq {
 		private Integer age;
 		
 		private String ssn;
+		
+		private String address;
 
 		public User toEntity() {
 			return User.builder()
@@ -70,6 +75,7 @@ public class UserReq {
 					.email(this.email)
 					.age(this.age)
 					.ssn(this.ssn)
+					.address(this.address)
 					.build();
 		}
 		
