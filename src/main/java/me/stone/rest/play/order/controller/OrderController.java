@@ -9,15 +9,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import me.stone.rest.play.common.exception.ResourceNotFoundException;
 import me.stone.rest.play.common.exception.UserNotFoundException;
 import me.stone.rest.play.order.payload.OrderReq.CreateDTO;
 import me.stone.rest.play.order.service.OrderService;
 
+@Api(tags = "User's Order Management RESTful Services", value = "OrderController")
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(value = "/users")
+@RequestMapping(value = "/api/users")
 public class OrderController {
 	
 	private final OrderService orderService;

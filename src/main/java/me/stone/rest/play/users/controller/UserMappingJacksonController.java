@@ -20,17 +20,17 @@ import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 
+import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import me.stone.rest.play.common.exception.UserNotFoundException;
 import me.stone.rest.play.users.payload.UserRes.FindDTO;
 import me.stone.rest.play.users.service.UserService;
 
-@Slf4j
+@Api(tags = "User Management RESTful Services [Jackson Mapper Filter]", value = "UserMappingJacksonController")
 @RequiredArgsConstructor
 @Validated // @Min(1)
 @RestController
-@RequestMapping("/jacksonfilter/users")
+@RequestMapping("/api/jacksonfilter/users")
 public class UserMappingJacksonController {
 	
 	private final UserService userService;

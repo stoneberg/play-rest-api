@@ -12,13 +12,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import me.stone.rest.play.order.payload.OrderRes.FindDTO;
 import me.stone.rest.play.order.service.OrderService;
 
+@Api(tags = "User's Order Management RESTful Services [HATEOAS]", value = "OrderHateoasController")
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(value = "/hateoas/users")
+@RequestMapping(value = "/api/hateoas/users")
 public class OrderHateoasController {
 	
 	private final OrderService orderService;

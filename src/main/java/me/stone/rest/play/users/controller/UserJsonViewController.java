@@ -13,18 +13,18 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import me.stone.rest.play.common.exception.UserNotFoundException;
 import me.stone.rest.play.users.service.UserService;
 import me.stone.rest.play.users.view.Views;
 
 
-@Slf4j
+@Api(tags = "User Management RESTful Services [Json View]", value = "UserJsonViewController")
 @RequiredArgsConstructor
 @Validated // @Min(1)
 @RestController
-@RequestMapping("/jsonview/users")
+@RequestMapping("/api/jsonview/users")
 public class UserJsonViewController {
 	
 	private final UserService userService;

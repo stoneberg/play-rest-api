@@ -11,17 +11,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import me.stone.rest.play.common.exception.UserNotFoundException;
 import me.stone.rest.play.users.service.UserMapStructService;
-import me.stone.rest.play.users.service.UserModelMapperService;
 
-@Slf4j
+@Api(tags = "User Management RESTful Services [MapStruct]", value = "UserMapStructController")
 @RequiredArgsConstructor
 @Validated // @Min(1)
 @RestController
-@RequestMapping("/mapstruct/users")
+@RequestMapping("/api/mapstruct/users")
 public class UserMapStructController {
 	
 	private final UserMapStructService userMapStructService;

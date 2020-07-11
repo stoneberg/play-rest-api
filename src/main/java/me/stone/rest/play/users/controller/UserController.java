@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import me.stone.rest.play.common.exception.UserExistsException;
 import me.stone.rest.play.common.exception.UserNotFoundException;
 import me.stone.rest.play.common.exception.UsernameNotFoundException;
@@ -27,23 +29,27 @@ import me.stone.rest.play.users.payload.UserReq.CreateDTO;
 import me.stone.rest.play.users.payload.UserReq.UpdateDTO;
 import me.stone.rest.play.users.service.UserService;
 
-@Slf4j
+@Api(tags = "User Management RESTful Services", value = "UserController")
 @RequiredArgsConstructor
 @Validated // @Min(1) for method parameter validation not bean validation
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 public class UserController {
     
     private final UserService userService;
     
     
+    @ApiOperation(value = "Retrieve list of users")
     @GetMapping
     public ResponseEntity<?> getAllUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
     }
     
+    @ApiOperation(value = "Create new user")
     @PostMapping
-    public ResponseEntity<?> createUser(@Valid @RequestBody CreateDTO dto, UriComponentsBuilder builder) {
+    public ResponseEntity<?> createUser(@ApiParam("User information for a new user to be created.") 
+        @Valid @RequestBody CreateDTO dto, UriComponentsBuilder builder) {
+        
         try {
             Long id = userService.createUser(dto.toEntity());
             HttpHeaders headers = new HttpHeaders();

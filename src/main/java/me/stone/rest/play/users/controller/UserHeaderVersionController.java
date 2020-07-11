@@ -11,16 +11,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import me.stone.rest.play.common.exception.UserNotFoundException;
 import me.stone.rest.play.users.service.UserVersionService;
 
-@Slf4j
+@Api(tags = "User Management RESTful Services [Header Versioning]", value = "UserHeaderVersionController")
 @RequiredArgsConstructor
 @Validated // @Min(1) for method parameter validation not bean validation
 @RestController
-@RequestMapping("/version/header/users")
+@RequestMapping("/api/version/header/users")
 public class UserHeaderVersionController {
 	
 	private final UserVersionService userVersionService;
