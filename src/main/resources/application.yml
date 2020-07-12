@@ -19,8 +19,13 @@ spring:
         
 # Actuator
 management:
-    endpoints:
-      web:
-        exposure:
-          include: "*"
-                 endpoint:      health:        show-components: always        show-details: always
+  endpoints:
+    web:      exposure:        include: "*"             endpoint:    health:      show-components: always
+      show-details: always
+        metrics:    export:      jmx:
+        enabled: true        
+          
+          
+          
+          
+          
