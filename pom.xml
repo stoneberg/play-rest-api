@@ -19,6 +19,7 @@
         <java.version>1.8</java.version>
         <org.projectlombok.version>1.18.12</org.projectlombok.version>
         <org.mapstruct.version>1.3.1.Final</org.mapstruct.version>
+        <spring-boot-admin.version>2.2.3</spring-boot-admin.version>
     </properties>
 
     <dependencies>
@@ -27,8 +28,8 @@
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
         <dependency>
-          <groupId>org.springframework.boot</groupId>
-          <artifactId>spring-boot-starter-validation</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -45,6 +46,15 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>de.codecentric</groupId>
+            <artifactId>spring-boot-admin-starter-client</artifactId>
+            <version>${spring-boot-admin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <scope>runtime</scope>
             <optional>true</optional>
@@ -58,7 +68,7 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
-        </dependency>    
+        </dependency>
         <!-- https://mvnrepository.com/artifact/net.rakugakibox.util/yaml-resource-bundle -->
         <dependency>
             <groupId>net.rakugakibox.util</groupId>
@@ -70,7 +80,7 @@
             <groupId>p6spy</groupId>
             <artifactId>p6spy</artifactId>
             <version>3.8.7</version>
-        </dependency>     
+        </dependency>
         <!-- https://mvnrepository.com/artifact/com.integralblue/log4jdbc-spring-boot-starter -->
         <dependency>
             <groupId>com.integralblue</groupId>
@@ -164,6 +174,15 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <!-- Actuator Info -->
+                <executions>
+                    <execution>
+                        <id>build-info</id>
+                        <goals>
+                            <goal>build-info</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <!-- QueryDSL -->
             <plugin>
@@ -198,7 +217,7 @@
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
-                        <version>${org.projectlombok.version}</version>
+                            <version>${org.projectlombok.version}</version>
                         </path>
                     </annotationProcessorPaths>
                 </configuration>

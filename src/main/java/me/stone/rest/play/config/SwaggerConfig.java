@@ -57,6 +57,7 @@ public class SwaggerConfig implements WebMvcConfigurer {
                 .produces(getProduceContentTypes())
                 .apiInfo(apiInfo())
                 .select()
+                //.apis(RequestHandlerSelectors.withClassAnnotation(RestController::class.java))
                 .apis(RequestHandlerSelectors.basePackage("me.stone.rest.play")) // exclude basic-error-controller
                 .paths(PathSelectors.ant("/api/**"))
                 .build();
