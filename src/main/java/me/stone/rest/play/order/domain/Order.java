@@ -16,6 +16,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import me.stone.rest.play.common.base.BaseTimeEntity;
 import me.stone.rest.play.users.domain.User;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -24,7 +25,7 @@ import me.stone.rest.play.users.domain.User;
 @Getter
 @Entity
 @Table(name = "orders")
-public class Order {
+public class Order extends BaseTimeEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

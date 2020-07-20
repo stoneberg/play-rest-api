@@ -19,6 +19,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import me.stone.rest.play.common.base.BaseTimeEntity;
 import me.stone.rest.play.order.domain.Order;
 import me.stone.rest.play.users.payload.UserReq.UpdateDTO;
 
@@ -28,7 +29,7 @@ import me.stone.rest.play.users.payload.UserReq.UpdateDTO;
 @Getter
 @Entity
 @Table(name = "users")
-public class User {
+public class User extends BaseTimeEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
