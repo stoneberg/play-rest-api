@@ -12,14 +12,14 @@ import me.stone.rest.play.users.payload.UserRes.FindMsDTO;
 @Mapper(componentModel = "spring")
 public interface UserMapper {
     
-	UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
+    UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
-	// UserEntity To UserDTO
-	@Mapping(source = "id", target = "userId")
-	@Mapping(source = "email", target = "emailAddress")
-	FindMsDTO userToUserDTO(User user);
-	
-	// List<UserEntity> To List<UserDTO>
-	List<FindMsDTO> usersToUserDTOs(List<User> users);
+    // UserEntity To UserDTO
+    @Mapping(source = "id", target = "userId")
+    @Mapping(source = "email", target = "emailAddress")
+    FindMsDTO userToUserDTO(User user);
+    
+    // List<UserEntity> To List<UserDTO>
+    List<FindMsDTO> usersToUserDTOs(List<User> users);
     
 }
