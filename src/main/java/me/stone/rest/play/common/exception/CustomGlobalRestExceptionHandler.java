@@ -52,6 +52,12 @@ public class CustomGlobalRestExceptionHandler {
         return buildError(ErrorCode.USER_EXISTS, ex.getMessage(), request);
     }
     
+    @ExceptionHandler(EmailDuplicationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    protected ErrorResponse handlerEmailDuplicationException(EmailDuplicationException ex, WebRequest request) {
+        return buildError(ErrorCode.EMAIL_DUPLICATION, ex.getMessage(), request);
+    }
+    
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     protected ErrorResponse handleMethodArgumentNotValidException(MethodArgumentNotValidException ex, WebRequest request) {
@@ -80,14 +86,6 @@ public class CustomGlobalRestExceptionHandler {
         log.error(errorCode.getMessage(), ex.getConstraintViolations());
         return buildError(errorCode, message, request);
     }
-
-//    @ExceptionHandler(EmailDuplicationException.class)
-//    @ResponseStatus(HttpStatus.BAD_REQUEST)
-//    protected ErrorResponse handleConstraintViolationException(EmailDuplicationException ex, WebRequest request) {
-//        final ErrorCode errorCode = ErrorCode.EMAIL_DUPLICATION;
-//        log.error(errorCode.getMessage(), ex.getEmail() + ex.getField());
-//        return buildError(errorCode, request);
-//    }
 
     @ExceptionHandler(DataIntegrityViolationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
