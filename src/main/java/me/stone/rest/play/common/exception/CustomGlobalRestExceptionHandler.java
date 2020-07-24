@@ -74,7 +74,7 @@ public class CustomGlobalRestExceptionHandler {
     
     @ExceptionHandler(ConstraintViolationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResponse handleContraintViolationException(ConstraintViolationException ex, WebRequest request) {
+    public ErrorResponse handleConstraintViolationException(ConstraintViolationException ex, WebRequest request) {
         final ErrorCode errorCode = ErrorCode.INPUT_VALUE_INVALID;
         final String message = getResultMessage(ex.getConstraintViolations().iterator());
         log.error(errorCode.getMessage(), ex.getConstraintViolations());
