@@ -67,7 +67,7 @@ public class CustomGlobalRestExceptionHandler {
     
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    protected ErrorResponse handleMethodArgumentTypeMismatchExceptio(MethodArgumentTypeMismatchException ex, WebRequest request) {
+    protected ErrorResponse handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException ex, WebRequest request) {
     	return buildError(ErrorCode.INPUT_VALUE_INVALID, ex.getMessage(), request);
     }
 
