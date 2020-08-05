@@ -14,7 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import me.stone.rest.play.order.repository.OrderRepository;
 import me.stone.rest.play.users.domain.User;
 
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class UserRepoTest {
 	
 	@Autowired
